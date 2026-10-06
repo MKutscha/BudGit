@@ -2,7 +2,7 @@
 import { api, type Snapshot } from './api';
 import { webApi } from './backend/web';
 
-export const IS_WEB = import.meta.env.VITE_TARGET === 'web';
+export const IS_WEB = import.meta.env.VITE_TARGET === 'web' || !('__TAURI_INTERNALS__' in window);
 
 /** Funktionen, die es nur am Desktop gibt. Die UI blendet sie im Web aus. */
 export const caps = { history: !IS_WEB, backups: !IS_WEB, dataDir: !IS_WEB };

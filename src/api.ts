@@ -46,7 +46,8 @@ export interface TemplateInfo {
 
 /** Beide Backends haben dieselbe Form; welches gebaut wird, entscheidet der Build-Modus. */
 export type Api = typeof tauriApi;
-export const api: Api = import.meta.env.VITE_TARGET === 'web' ? webApi : tauriApi;
+const inTauri = typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
+export const api: Api = import.meta.env.VITE_TARGET === 'web' || !inTauri ? webApi : tauriApi;
 
 // ---------- Fehler ----------
 
